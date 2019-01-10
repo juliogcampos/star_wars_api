@@ -1,0 +1,26 @@
+{
+  "name": "star_wars_api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/juliogcampos/star_wars_api.git"
+  },
+  "author": "Júlio Campos",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/juliogcampos/star_wars_api/issues"
+  },
+  "homepage": "https://github.com/juliogcampos/star_wars_api#readme",
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.9"
+  }
+}
