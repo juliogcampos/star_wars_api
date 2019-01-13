@@ -34,26 +34,37 @@
             </div>
         </nav>
 
-        <div class="container mt-5 w-25">
-            <h2 class="mb-4">Adicionar planeta</h2>
-            <form class="p-3" action="/adicionar" method="POST">
-                <div class="row">
-                    <label>Nome</label>
-                    <input type="text" class="form-control mb-3" name="nome">
+        <div class="container mt-5 w-50">
+            <h2 class="mb-4">Remover planeta</h2>
 
-                    <label>Clima</label>
-                    <input type="text" class="form-control mb-3" name="clima">
-
-                    <label>Terreno</label>
-                    <input type="text" class="form-control mb-3" name="terreno">
-
-                    <label>Aparições em filmes</label>
-                    <input type="number" min="0" class="form-control mb-4" name="aparicoes">
-                </div>
-                <div class="row float-right">
-                    <button type="submit" class="btn btn-primary px-4">Salvar</button>
-                </div>
-            </form>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th class="w-50" scope="col">Id</th>
+                        <th class="w-50" scope="col">Nome</th>
+                        <th class="w-50" scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% data.forEach(details => { %>
+                    <tr>
+                        <td>
+                            <%= details._id %>
+                        </td>
+                        <td>
+                            <%= details.nome %>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-danger">
+                                <a class="text-white" href="/remover/<%= details._id %>">
+                                    Remover
+                                </a>
+                            </button>
+                        </td>
+                    </tr>
+                    <% }); %>
+                </tbody>
+            </table>
         </div>
 
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>

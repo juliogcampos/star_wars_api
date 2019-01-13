@@ -34,26 +34,13 @@
             </div>
         </nav>
 
-        <div class="container mt-5 w-25">
-            <h2 class="mb-4">Adicionar planeta</h2>
-            <form class="p-3" action="/adicionar" method="POST">
-                <div class="row">
-                    <label>Nome</label>
-                    <input type="text" class="form-control mb-3" name="nome">
+        <div class="container mt-5 w-50">
+            <h2 class="mb-4">Lista de Planetas</h2>
 
-                    <label>Clima</label>
-                    <input type="text" class="form-control mb-3" name="clima">
+            <textarea class="w-100 p-3" rows="15">
+<%= data %>
+            </textarea>
 
-                    <label>Terreno</label>
-                    <input type="text" class="form-control mb-3" name="terreno">
-
-                    <label>Aparições em filmes</label>
-                    <input type="number" min="0" class="form-control mb-4" name="aparicoes">
-                </div>
-                <div class="row float-right">
-                    <button type="submit" class="btn btn-primary px-4">Salvar</button>
-                </div>
-            </form>
         </div>
 
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
