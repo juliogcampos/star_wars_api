@@ -34,20 +34,30 @@
             </div>
         </nav>
 
-        <div class="container mt-5 w-50">
-            <h2 class="mb-4">Adicionar planeta</h2>
-                    <form class="p-3" action="/adicionar" method="POST">
-                        <div class="row">
-                            <input type="text" class="form-control mb-3" placeholder="Nome" name="nome">
-                            <input type="text" class="form-control mb-3" placeholder="Clima" name="clima">
-                            <input type="text" class="form-control mb-3" placeholder="Terreno" name="terreno">
-                            <input type="number" min="0" class="form-control mb-4" placeholder="Aparições em filmes"
-                                name="aparicoes">
-                        </div>
-                        <div class="row float-right">
-                            <button type="submit" class="btn btn-primary px-4">Salvar</button>
-                        </div>
-                    </form>
+        <div class="container mt-5">
+
+            <h2 class="mb-5">Buscar Planeta</h2>
+
+            <h5>Por Nome</h5>
+            <form class="form-row mb-2" action="/buscar/nome" method="POST">
+                <div class="col">
+                    <input type="text" class="form-control mb-3" placeholder="Digite um nome válido" name="nome"
+                        required>
+                </div>
+                <div class="col">
+                    <button type="submit" class="btn btn-primary px-4">Buscar</button>
+                </div>
+            </form>
+
+            <h5>Por Id</h5>
+            <form class="form-row" action="/buscar/id" method="POST">
+                <div class="col">
+                    <input type="text" class="form-control mb-3" placeholder="Digite um id válido" name="id" required>
+                </div>
+                <div class="col">
+                    <button type="submit" class="btn btn-primary px-4">Buscar</button>
+                </div>
+            </form>
         </div>
 
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>

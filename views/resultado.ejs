@@ -34,26 +34,21 @@
             </div>
         </nav>
 
-        <div class="container mt-5 w-50">
-            <h2 class="mb-4">Adicionar Planeta</h2>
-            <form class="p-3" action="/adicionar" method="POST">
-                <div class="row">
-                    <label>Nome</label>
-                    <input type="text" class="form-control mb-3" name="nome" required>
+        <div class="container mt-5">
+            <h2 class="mb-4">Resultado</h2>
 
-                    <label>Clima</label>
-                    <input type="text" class="form-control mb-3" name="clima" required>
+            <%if (!data.nome) { %>
+            <div class="alert alert-danger text-center" role="alert">
+                O planeta <a class="font-italic">'<%= data %>'</a> não foi encontrado! <br>
+                Realize uma nova <a class="alert-link" href="/buscar">busca</a> ou consulte a <a class="alert-link" href="/listar">lista</a> de planetas.
+            </div>
+            <% } %>
 
-                    <label>Terreno</label>
-                    <input type="text" class="form-control mb-3" name="terreno" required>
-
-                    <label>Aparições em filmes</label>
-                    <input type="number" min="0" class="form-control mb-4" name="aparicoes" placeholder="Digite um número" required>
-                </div>
-                <div class="row float-right">
-                    <button type="submit" class="btn btn-success px-4">Adicionar</button>
-                </div>
-            </form>
+            <%if (data.nome) { %>
+            <textarea class="w-100 p-3" rows="15">
+<%= data %>
+            </textarea>
+            <% } %>
         </div>
 
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
