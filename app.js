@@ -41,7 +41,7 @@ app.post('/adicionar', (req, res) => {
     db.collection(`${collection}`).insertOne(req.body, (err, result) => {
         if (err) return console.log(err);
         console.log('Planeta inserido no banco de dados!');
-        res.redirect('/listar');
+        res.redirect('/');
     });
 });
 
@@ -106,11 +106,9 @@ app.get('/remover', (req, res) => {
 app.route('/remover/:id')
     .get((req, res) => {
         var id = req.params.id;
-        console.log(id);
         db.collection(`${collection}`).deleteOne({ _id: ObjectId(id) }, (err, result) => {
             if (err) return res.send(500, err);
-            console.log('Planeta deletado do banco de dados!');
-            res.redirect('/listar');
-
+            console.log(`Planeta '${id}' deletado do banco de dados!`);
+            res.redirect('/remover');
         });
     });
