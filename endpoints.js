@@ -1,8 +1,10 @@
 const app = require('./server');
+const MongoClient = require('mongodb').MongoClient;
 const ObjectId = require('mongodb').ObjectID;
 const collection = 'data';
 
 // requisições ao servidor
+
 app.get('/', (req, res) => {
     res.render('index.ejs');
 });
@@ -34,34 +36,40 @@ app.get('/buscar', (req, res) => {
     });
 });
 
-app.post('/buscar/:nome', (req, res) => {
-    let nome = req.body.nome;
-    console.log("Buscar planeta", nome);
-    let data = db.collection(`${collection}`).find(req.body);
-    data.toArray((err, result) => {
-        if (err) return console.log(err);
-        result = JSON.stringify(result, null, "   ");
-        if (!result.nome) {
-            res.render('resultado.ejs', { data: `${nome}` });
-        } else {
-            res.render('resultado.ejs', { data: result });
-        }
-    });
-});
+app.post('/buscar/:string', (req, res) => {
 
-app.post('/buscar/:id', (req, res) => {
-    let id = req.body.id;
-    console.log("Buscar planeta com id", id);
-    let data = db.collection(`${collection}`).find(req.body);
-    data.toArray((err, result) => {
-        if (err) return console.log(err);
-        result = JSON.stringify(result, null, "   ");
-        if (result.id == undefined) {
-            res.render('resultado.ejs', { data: `${id}` });
-        } else {
-            res.render('resultado.ejs', { data: result });
+    if (req.body.nome) {
+        let nome = req.body.nome;
+        let data = db.collection(`${collection}`).find({ nome: nome });
+        data.toArray((err, result) => {
+            if (err) return console.log(err);
+            if (result.length > 0) {
+                result = JSON.stringify(result, null, "   ");
+                res.render('resultado.ejs', { data: result });
+            } else {
+                res.render('erro.ejs', { data: `${nome}` });
+            }
+        });
+    }
+
+    if (req.body.id) {
+        let id = req.body.id;
+
+        if (id.length < 12) { // ObjectId deve ter no mínimo 12 caracteres
+            res.render('erro.ejs', { data: `${id}` });
         }
-    });
+
+        let data = db.collection(`${collection}`).find({ _id: ObjectId(id) });
+        data.toArray((err, result) => {
+            if (err) return console.log(err);
+            if (result.length > 0) {
+                result = JSON.stringify(result, null, "   ");
+                res.render('resultado.ejs', { data: result });
+            } else {
+                res.render('erro.ejs', { data: `${id}` });
+            }
+        });
+    }
 });
 
 app.get('/remover', (req, res) => {
@@ -73,12 +81,11 @@ app.get('/remover', (req, res) => {
     });
 });
 
-app.route('/remover/:id')
-    .get((req, res) => {
-        var id = req.params.id;
-        db.collection(`${collection}`).deleteOne({ _id: ObjectId(id) }, (err, result) => {
-            if (err) return res.send(500, err);
-            console.log(`Planeta '${id}' deletado do banco de dados!`);
-            res.redirect('/remover');
-        });
+app.get('/remover/:id', (req, res) => {
+    var id = req.params.id;
+    db.collection(`${collection}`).deleteOne({ _id: ObjectId(id) }, (err, result) => {
+        if (err) return res.send(500, err);
+        console.log(`Planeta '${id}' deletado do banco de dados!`);
+        res.redirect('/remover');
     });
+});

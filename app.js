@@ -16,7 +16,7 @@ MongoClient.connect(uri, { useNewUrlParser: true }, (err, client) => {
     db = client.db(`${db_name}`);
 
     // estabelecer comunicação entre servidor e navegador
-    app.listen(3000, res => {
+    app.listen(3000, (req, res) => {
         console.log(`Servidor em execução: http://localhost:3000/`);
     });
 })
