@@ -1,3 +1,5 @@
+// importações
+
 const app = require('./server');
 const MongoClient = require('mongodb').MongoClient;
 const ObjectId = require('mongodb').ObjectID;
@@ -13,7 +15,7 @@ app.post('/adicionar', (req, res) => {
     db.collection(`${collection}`).insertOne(req.body, (err, result) => {
         if (err) return console.log(err);
         console.log('Planeta inserido no banco de dados!');
-        res.redirect('/');
+        res.redirect('/listar');
     });
 });
 

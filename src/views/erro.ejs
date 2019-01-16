@@ -14,11 +14,13 @@
         <div class="container mt-5">
             <h2 class="mb-4">Resultado</h2>
 
-            <%if (data.length > 0) { %>
-            <textarea class="w-100 p-3" rows="15">
-<%= data %>
-                </textarea>
-            <% } %>
+            <div class="alert alert-danger text-center" role="alert">
+                <strong>
+                    <%= data %>
+                </strong>
+                não foi encontrado!<br>
+                Realize uma nova <a class="alert-link" href="/buscar">busca</a>.
+            </div>
         </div>
 </body>
 
